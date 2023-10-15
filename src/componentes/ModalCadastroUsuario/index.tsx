@@ -5,7 +5,12 @@ import imagemPrincipal from './assets/login.png'
 
 import './ModalCadastroUsuario.css'
 
-const ModalCadastroUsuario = () => {
+interface PropsModalCadastroUsuario {
+    aberto: booleanan
+    aoFechar: () => void
+}
+
+const ModalCadastroUsuario = ({aberto, aoFechar} : PropsModalCadastroUsuario ) => {
 
     const [nome, setNome] = useState('')
     const [email, setEmail] = useState('')
@@ -25,14 +30,29 @@ const ModalCadastroUsuario = () => {
             cep,
             complemento
         }
-        console.log(usuario)
-        alert('Usuário foi cadastrado com sucesso!')
+
+        axios.post('http://localhost:8000/public/registrar', usuario)
+            .then(() => {
+                alert('Usuário cadastrado com sucesso')
+                setNome('')
+                setEmail('')
+                setEndereco('')
+                setComplemento('')
+                setCep('')
+                setSenha('')
+                setSenhaConfirmada('')
+                aoFechar()
+                
+            })
+            .catch(() => {
+                alert('Ops! Alguma coisa deu errado!')
+            })
     }
 
     return (<AbModal 
         titulo="Cadastrar" 
-        aberta={true}
-        aoFechar={() => console.log('fecha ai')}    
+        aberta={aberto}
+        aoFechar={aoFechar}    
     >
         <section className="corpoModalCadastro">
             <figure>
