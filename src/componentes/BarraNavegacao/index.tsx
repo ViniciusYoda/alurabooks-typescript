@@ -29,91 +29,89 @@ const BarraNavegacao = () => {
         navigate('/')
     }
 
-    return (
-        <nav className="ab-navbar">
-            <h1 className="logo">
-                <Link to="/">
-                    <img className="logo" src={logo} alt="Logo da AluraBooks" />
-                </Link>
-            </h1>
-            <ul className="navegacao">
+    return (<nav className="ab-navbar">
+        <h1 className="logo">
+            <Link to="/">
+                <img className="logo" src={logo} alt="Logo da AluraBooks" />
+            </Link>
+        </h1>
+        <ul className="navegacao">
+            <li>
+                <a href="#!">Categorias</a>
+                <ul className="submenu">
+                    <li>
+                        <Link to="/">
+                            Frontend
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/">
+                            Programação
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/">
+                            Infraestrutura
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/">
+                            Business
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/">
+                            Design e UX
+                        </Link>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <ul className="acoes">
+            {!usuarioEstaLogado && (<>
                 <li>
-                    <a href="#!">Categorias</a>
-                    <ul className="submenu">
-                        <li>
-                            <Link to="/">
-                                Frontend
-                            </Link>
-                        </li>
-                        <li>
-                            <Link to="/">
-                                Programação
-                            </Link>
-                        </li>
-                        <li>
-                            <Link to="/">
-                                Infraestrutura
-                            </Link>
-                        </li>
-                        <li>
-                            <Link to="/">
-                                Business
-                            </Link>
-                        </li>
-                        <li>
-                            <Link to="/">
-                                Design e UX
-                            </Link>
-                        </li>
-                    </ul>
+                    <BotaoNavegacao
+                        texto="Login"
+                        textoAltSrc="Icone representando um usuário"
+                        imagemSrc={usuario}
+                        onClick={() => setModalLoginAberta(true)}
+                    />
+                    <ModalLoginUsuario
+                        aberta={modalLoginAberta}
+                        aoFechar={() => setModalLoginAberta(false)}
+                        aoEfetuarLogin={aoEfetuarLogin}
+                    />
                 </li>
-            </ul>
-            <ul className="acoes">
-                {!usuarioEstaLogado && (<>
+                <li>
+                    <BotaoNavegacao
+                        texto="Cadastrar-se"
+                        textoAltSrc="Icone representando um usuário"
+                        imagemSrc={usuario}
+                        onClick={() => setModalCadastroAberta(true)}
+                    />
+                    <ModalCadastroUsuario
+                        aberta={modalCadastroAberta}
+                        aoFechar={() => setModalCadastroAberta(false)}
+                    />
+                </li>
+            </>)}
+            {usuarioEstaLogado &&
+                <>
                     <li>
-                        <BotaoNavegacao
-                            texto="Login"
-                            textoAltSrc="Icone representando um usuário"
-                            imagemSrc={usuario}
-                            onClick={() => setModalLoginAberta(true)}
-                        />
-                        <ModalLoginUsuario
-                            aberta={modalLoginAberta}
-                            aoFechar={() => setModalLoginAberta(false)}
-                            aoEfetuarLogin={aoEfetuarLogin}
-                        />
+                        <Link to="/minha-conta/pedidos">Minha conta</Link>
                     </li>
                     <li>
-                        <BotaoNavegacao
-                            texto="Cadastrar-se"
+                        <BotaoNavegacao 
+                            texto="Logout"
                             textoAltSrc="Icone representando um usuário"
                             imagemSrc={usuario}
-                            onClick={() => setModalCadastroAberta(true)}
-                        />
-                        <ModalCadastroUsuario
-                            aberta={modalCadastroAberta}
-                            aoFechar={() => setModalCadastroAberta(false)}
+                            onClick={efetuarLogout}
                         />
                     </li>
-                </>)}
-                {usuarioEstaLogado &&
-                    <>
-                        <li>
-                            <Link to="/minha-conta/pedidos">Minha conta</Link>
-                        </li>
-                        <li>
-                            <BotaoNavegacao
-                                texto="Logout"
-                                textoAltSrc="Icone representando um usuário"
-                                imagemSrc={usuario}
-                                onClick={efetuarLogout}
-                            />
-                        </li>
-                    </>
-                }
-            </ul>
-        </nav>
-    )
+                </>
+            }
+        </ul>
+    </nav>)
 }
 
 export default BarraNavegacao
