@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import BotaoNavegacao from "../BotaoNavegacao"
 import ModalCadastroUsuario from "../ModalCadastroUsuario"
@@ -6,11 +6,23 @@ import ModalLoginUsuario from "../ModalLoginUsuario"
 import logo from './assets/logo.png'
 import usuario from './assets/usuario.svg'
 import './BarraNavegacao.css'
+import { ICategoria } from "../../interfaces/ICategoria"
+import http from "../../http"
 
 const BarraNavegacao = () => {
 
     const [modalCadastroAberta, setModalCadastroAberta] = useState(false)
     const [modalLoginAberta, setModalLoginAberta] = useState(false)
+
+    const [categorias, setCategorias] = useState<ICategoria[]>([])
+
+    useEffect(() => {
+        http.get<ICategoria[]>('categorias')
+            .then(resposta => {
+                console.log(resposta.data)
+                setCategorias(resposta.data)
+            })
+    }, [])
 
     let navigate = useNavigate();
 
@@ -39,31 +51,11 @@ const BarraNavegacao = () => {
             <li>
                 <a href="#!">Categorias</a>
                 <ul className="submenu">
-                    <li>
-                        <Link to="/">
-                            Frontend
+                    {categorias.map(categoria =>(  <li key={categoria.id}>
+                        <Link to={`/categorias/${categoria.slug}`}>
+                            {categoria.nome}
                         </Link>
-                    </li>
-                    <li>
-                        <Link to="/">
-                            Programação
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/">
-                            Infraestrutura
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/">
-                            Business
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/">
-                            Design e UX
-                        </Link>
-                    </li>
+                    </li>))}
                 </ul>
             </li>
         </ul>
