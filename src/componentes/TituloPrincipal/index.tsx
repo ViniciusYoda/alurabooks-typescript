@@ -9,4 +9,4 @@ const TituloPrincipal = ({ texto } : TituloPrincipalProps) => {
     return (<h1 className="TituloPrincipal">{texto}</h1>)
 }
 
-export default TituloPrincipalProps
+export default TituloPrincipal
