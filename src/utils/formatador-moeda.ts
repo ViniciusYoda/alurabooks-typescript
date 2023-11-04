@@ -1,0 +1,1 @@
+export const formatador = Intl.NUmberFormat('pt-br', {style: 'currency', currency: 'BRL'})
