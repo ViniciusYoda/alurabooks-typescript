@@ -1,19 +1,36 @@
-import { obterProdutosDaCategoria } from "../../http"
 import CardLivro from "../CardLivro"
-import { useQuery } from "react-query"
 import './ListaLivros.css'
 import { ICategoria } from "../../interfaces/ICategoria"
+import { gql, useQuery } from "@apollo/client"
+import { ILivro } from "../../interfaces/ILivro"
 interface ListaLivrosProps {
     categoria: ICategoria
 }
 
+const OBTER_LIVROS = gql`
+    query ObterLivros {
+        livros {
+            id
+            slug
+            titulo
+            opcoesCompta {
+                id
+                preco
+            }
+        }
+    }
+`
 
 
 const ListaLivros = ({ categoria } : ListaLivrosProps ) => {
-    const { data: produtos } = useQuery(['buscaLivrosPorCategoria', categoria], () => obterProdutosDaCategoria(categoria))
+
+    const { data } = useQuery<{ livros:  ILivro[] }>(OBTER_LIVROS)
+
+
+    //const { data: produtos } = useQuery(['buscaLivrosPorCategoria', categoria], () => obterProdutosDaCategoria(categoria))
 
     return <section className="livros">
-        {produtos?.map(livro => <CardLivro livro={livro} key={livro.id} />)}
+        {data?.livros.map(livro => <CardLivro livro={livro} key={livro.id} />)}
     </section>
 }
 
