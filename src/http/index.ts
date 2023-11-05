@@ -1,6 +1,6 @@
 import axios from "axios";
-import { ICategoria } from "../../interfaces/ICategoria"
-import { ILivro } from "../../interfaces/ILivro"
+import { ICategoria } from "../interfaces/ICategoria";
+import { ILivro } from "../interfaces/ILivro";
 
 const http = axios.create({
     baseURL: 'http://localhost:8000',
@@ -31,21 +31,19 @@ export const obterCategoriaPorSlug = async (slug: string) => {
       slug
     }
   })
-
-  return resposta.data[0]
-}
-
-export const obterCategoriaPoProdutosDaCAtegoria = async (slug: string) => {
-  const resposta = await http.get<ICategoria[]>('categorias', {
-    params: {
-      slug
-    }
-  })
-
   return resposta.data[0]
 }
 
 export const obterLivrosDestaque = async (tipo: string) => {
-  const resposta = await http.get<ILivro[]>('public/${tipo}')
+  const resposta = await http.get<ILivro[]>(`public/${tipo}`)
+  return resposta.data
+}
+
+export const obterProdutosDaCategoria = async (categoria: ICategoria) => {
+  const resposta = await http.get<ILivro[]>('livros', {
+    params: {
+      categoria: categoria.id
+    }
+  })
   return resposta.data
 }

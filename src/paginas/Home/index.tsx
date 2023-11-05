@@ -13,9 +13,8 @@ import { obterLivrosDestaque } from "../../http"
 const Home = () => {
     const [busca, setBusca] = useState("")
 
-    const { data: lancamentos } = useQuey(['destauqes'], () => obterLivrosDestaque('lancamentos'))
+    const { data: lancamentos } = useQuery(['destaques'], () => obterLivrosDestaque('lancamentos'))
     const { data: maisVendidos } = useQuery(['maisVendidos'], () => obterLivrosDestaque('mais-vendidos'))
-
     return (<section className="home">
         <Banner subtitulo="Encontre em nossa estante o que precisa para seu desenvolvimento!" titulo="Já sabe por onde começar?">
             <form className="buscar">
@@ -29,7 +28,7 @@ const Home = () => {
             </form>
         </Banner>
         <Titulo texto="ÚLTIMOS LANÇAMENTOS"/>
-        <LivrosDestaque livros={lancamentos  ?? []}/>
+        <LivrosDestaque livros={lancamentos ?? []}/>
         <Titulo texto="MAIS VENDIDOS"/>
         <LivrosDestaque livros={maisVendidos ?? []}/>
         <TagsCategorias />

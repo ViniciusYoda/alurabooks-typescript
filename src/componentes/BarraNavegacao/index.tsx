@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
+import http from "../../http"
+import { ICategoria } from "../../interfaces/ICategoria"
 import BotaoNavegacao from "../BotaoNavegacao"
 import ModalCadastroUsuario from "../ModalCadastroUsuario"
 import ModalLoginUsuario from "../ModalLoginUsuario"
 import logo from './assets/logo.png'
 import usuario from './assets/usuario.svg'
 import './BarraNavegacao.css'
-import { ICategoria } from "../../interfaces/ICategoria"
-import http from "../../http"
 
 const BarraNavegacao = () => {
 
@@ -51,7 +51,7 @@ const BarraNavegacao = () => {
             <li>
                 <a href="#!">Categorias</a>
                 <ul className="submenu">
-                    {categorias.map(categoria =>(  <li key={categoria.id}>
+                    {categorias.map(categoria => (<li key={categoria.id}>
                         <Link to={`/categorias/${categoria.slug}`}>
                             {categoria.nome}
                         </Link>

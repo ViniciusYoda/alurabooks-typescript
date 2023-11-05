@@ -10,35 +10,35 @@ interface LivrosDestaqueProps {
 }
 
 const LivrosDestaque = ({ livros }: LivrosDestaqueProps) => {
-
+    
     const [selecionado, selecionarLivro] = useState<ILivro>()
+    
+        useEffect(() => {
+            if (livros?.length) {
+                selecionarLivro(livros[0])
+                
+            }
+        }, [livros])
 
-    useEffect(() => {
-        if(livro?.length) {
-            selecionarLivro(lirvos[0])
-        }
-    }, [livros])
-
-    const valorMinimo = selecionado ? Math.min(..selecionado.opcoesCompra.map(op => op.preco)) : 0
+    const valorMinimo = selecionado ? Math.min(...selecionado.opcoesCompra.map(op => op.preco)) : 0
 
     return (<section className="LivrosDestaque">
         <div>
             <ul className="livros">
                 {livros.map(livro => {
                     return (
-                    <li 
-                        key={livro.titulo}
-                        onClick={() => selecionarLivro(livro)} 
-                        className={selecionado?.titulo === livro.titulo ? 'selecionado' : ''}
-                    >
-                        <img src={livro.imagemCapa} alt={`Capa do livro ${livro.titulo} escrito por ${livro.autor}`} />
-                    </li>)
+                        <li
+                            key={livro.titulo}
+                            onClick={() => selecionarLivro(livro)}
+                            className={selecionado?.titulo === livro.titulo ? 'selecionado' : ''}
+                        >
+                            <img src={livro.imagemCapa} alt={`Capa do livro ${livro.titulo} escrito por ${livro.autor}`} />
+                        </li>)
                 })}
             </ul>
         </div>
         <AbCard>
-            {selecionado && 
-            <div className="selecionado-detalhes">
+            {selecionado && <div className="selecionado-detalhes">
                 <header>
                     <h5>Sobre o livro:</h5>
                 </header>
