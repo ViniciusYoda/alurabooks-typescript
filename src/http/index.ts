@@ -35,6 +35,16 @@ export const obterCategoriaPorSlug = async (slug: string) => {
   return resposta.data[0]
 }
 
+export const obterCategoriaPoProdutosDaCAtegoria = async (slug: string) => {
+  const resposta = await http.get<ICategoria[]>('categorias', {
+    params: {
+      slug
+    }
+  })
+
+  return resposta.data[0]
+}
+
 export const obterLivrosDestaque = async (tipo: string) => {
   const resposta = await http.get<ILivro[]>('public/${tipo}')
   return resposta.data

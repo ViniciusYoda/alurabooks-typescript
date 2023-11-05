@@ -1,4 +1,5 @@
 import TituloPrincipal from "../../componentes/TituloPrincipal"
+import ListaLivros from "../../componentes/ListaLivros"
 import { useParams } from "react-router-dom"
 import {obterCategoriaPorSlug} from "../../http"
 import Loader from "../../componentes/Loader"
@@ -17,6 +18,7 @@ const Categoria = () => {
 
     return(<section>
         <TituloPrincipal texto={categoria?.nome ?? ''} />
+        <ListaLivros categoria={categoria!} />
         </section>)
 }
 
