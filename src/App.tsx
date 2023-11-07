@@ -1,3 +1,4 @@
+
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { BrowserRouter } from 'react-router-dom';
 import './App.css';
@@ -9,11 +10,11 @@ const queryClient = new QueryClient()
 function App() {
   return (
     <ABPolloClient>
-          <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <Rotas />
-      </BrowserRouter>
-    </QueryClientProvider>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <Rotas />
+        </BrowserRouter>
+      </QueryClientProvider>
     </ABPolloClient>
 
   );

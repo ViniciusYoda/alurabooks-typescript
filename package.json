@@ -10,7 +10,7 @@
     "@testing-library/user-event": "^14.5.1",
     "@types/jest": "^29.5.7",
     "@types/node": "^20.8.10",
-    "@types/react": "^18.2.35",
+    "@types/react": "^18.2.36",
     "@types/react-dom": "^18.2.14",
     "axios": "^1.6.0",
     "ds-alurabooks": "^0.5.7",
@@ -46,5 +46,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint": "^8.53.0"
   }
 }
