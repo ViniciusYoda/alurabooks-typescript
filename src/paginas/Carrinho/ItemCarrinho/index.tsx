@@ -2,7 +2,7 @@ import { AbInputQuantidade } from "ds-alurabooks"
 import { IItemCarrinho } from "../../../interfaces/IItemCarrinho"
 import { formatador } from "../../../utils/formatador-moeda"
 
-import lixeira from './assets/lixeira.pmg'
+import lixeira from './assets/lixeira.png'
 
 import './ItemCarrinho.css'
 
@@ -11,6 +11,7 @@ interface ItemCarrinhoProps {
 }
 
 const ItemCarrinho = ({ item } : ItemCarrinhoProps) => {
+
 
     return (
         <div className="item-carrinho">

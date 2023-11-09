@@ -8,6 +8,8 @@ import Rotas from './rotas';
 
 const queryClient = new QueryClient()
 
+// começar a criar o client...
+
 function App() {
   return (
     <ABPolloClient>
